@@ -143,8 +143,7 @@ export default function CreateOrderDrawer() {
                   required
                   value={formData.writerId}
                   onChange={(val) => setFormData({ ...formData, writerId: val })}
-                  label="Select a writer..."
-                  className="w-full bg-background"
+                  placeholder="Select a writer..."
                 />
               </Field>
 
