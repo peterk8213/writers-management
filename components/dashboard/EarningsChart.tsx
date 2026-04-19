@@ -44,7 +44,11 @@ export function EarningsChart({ role = "writer", data }: EarningsChartProps) {
   }, [isMobile])
 
   const filteredData = React.useMemo(() => {
-    const referenceDate = new Date(data[data.length - 1]?.date ?? "1970-01-01")
+    if (!data.length) {
+      return []
+    }
+
+    const referenceDate = new Date(data[data.length - 1].date)
     let daysToSubtract = 90
 
     if (timeRange === "30d") {
