@@ -149,7 +149,11 @@ export default function AdminDashboardPage() {
                     <span>{account}</span>
                     <Badge variant="outline">
                       $
-                      {(pendingBalance / (group.accounts.length + 1)).toFixed(2)}
+                      {(
+                        group.accounts.length
+                          ? pendingBalance / group.accounts.length
+                          : 0
+                      ).toFixed(2)}
                     </Badge>
                   </div>
                 ))}

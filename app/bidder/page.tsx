@@ -63,6 +63,7 @@ const starterOrders: Order[] = [
 
 export default function BidderDashboardPage() {
   const [orders, setOrders] = useState(starterOrders);
+  const [nextOrderNumber, setNextOrderNumber] = useState(103);
   const [title, setTitle] = useState("");
   const [pages, setPages] = useState("1");
   const [writerId, setWriterId] = useState(writers[0].id);
@@ -78,7 +79,7 @@ export default function BidderDashboardPage() {
     }
 
     const nextOrder: Order = {
-      id: `ORD-${100 + orders.length + 1}`,
+      id: `ORD-${nextOrderNumber}`,
       title: title.trim(),
       pages: Number(pages) || 1,
       writerId: selectedWriter.id,
@@ -89,6 +90,7 @@ export default function BidderDashboardPage() {
     };
 
     setOrders((current) => [nextOrder, ...current]);
+    setNextOrderNumber((current) => current + 1);
     setTitle("");
   };
 
