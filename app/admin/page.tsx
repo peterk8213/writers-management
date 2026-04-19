@@ -151,7 +151,7 @@ export default function AdminDashboardPage() {
                       $
                       {(
                         group.accounts.length
-                          ? pendingBalance / group.accounts.length
+                          ? pendingBalance / payoutGroups.length / group.accounts.length
                           : 0
                       ).toFixed(2)}
                     </Badge>
