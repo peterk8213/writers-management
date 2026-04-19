@@ -69,6 +69,26 @@ export default function AdminDashboardPage() {
     [orders]
   );
 
+  const pendingByBidder = useMemo(() => {
+    return orders.reduce<Record<string, number>>((totals, order) => {
+      if (!order.legit) {
+        return totals;
+      }
+      totals[order.bidder] = (totals[order.bidder] ?? 0) + order.value;
+      return totals;
+    }, {});
+  }, [orders]);
+
+  const pendingByWriter = useMemo(() => {
+    return orders.reduce<Record<string, number>>((totals, order) => {
+      if (!order.legit) {
+        return totals;
+      }
+      totals[order.writer] = (totals[order.writer] ?? 0) + order.value;
+      return totals;
+    }, {});
+  }, [orders]);
+
   return (
     <div className="mx-auto max-w-6xl space-y-6 p-6">
       <Card>
@@ -150,9 +170,9 @@ export default function AdminDashboardPage() {
                     <Badge variant="outline">
                       $
                       {(
-                        group.accounts.length
-                          ? pendingBalance / payoutGroups.length / group.accounts.length
-                          : 0
+                        (group.role === "Bidders"
+                          ? pendingByBidder[account]
+                          : pendingByWriter[account]) ?? 0
                       ).toFixed(2)}
                     </Badge>
                   </div>

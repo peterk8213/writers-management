@@ -26,7 +26,6 @@ type Order = {
   title: string;
   pages: number;
   writerId: string;
-  writerName: string;
   costPerPage: number;
   costPerOrder: number;
   status: "active" | "cancelled";
@@ -44,7 +43,6 @@ const starterOrders: Order[] = [
     title: "Marketing Strategy Analysis",
     pages: 10,
     writerId: "w1",
-    writerName: "Alex Writer",
     costPerPage: 12,
     costPerOrder: 30,
     status: "active",
@@ -54,7 +52,6 @@ const starterOrders: Order[] = [
     title: "Nursing Reflection Paper",
     pages: 6,
     writerId: "w2",
-    writerName: "Sam Writer",
     costPerPage: 11,
     costPerOrder: 25,
     status: "active",
@@ -83,7 +80,6 @@ export default function BidderDashboardPage() {
       title: title.trim(),
       pages: Number(pages) || 1,
       writerId: selectedWriter.id,
-      writerName: selectedWriter.name,
       costPerPage: Number(costPerPage) || 0,
       costPerOrder: Number(costPerOrder) || 0,
       status: "active",
@@ -196,7 +192,6 @@ export default function BidderDashboardPage() {
                         }
                         updateOrder(order.id, {
                           writerId: selectedWriter.id,
-                          writerName: selectedWriter.name,
                         });
                       }}
                     >
@@ -243,7 +238,6 @@ export default function BidderDashboardPage() {
                         const nextWriter = writers[(currentIndex + 1) % writers.length];
                         updateOrder(order.id, {
                           writerId: nextWriter.id,
-                          writerName: nextWriter.name,
                         });
                       }}
                     >
